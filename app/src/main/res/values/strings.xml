@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Resep Si Janda</string>
+    <string name="title_home">Home</string>
+    <string name="title_discover">Discover</string>
+    <string name="title_myrecipes">My Recipes</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search</string>
+    <string name="resep_si_janda">Resep Si Janda</string>
+</resources>
