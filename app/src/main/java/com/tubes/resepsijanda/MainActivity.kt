@@ -3,6 +3,7 @@ package com.tubes.resepsijanda
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.SearchView
 import android.widget.Toast
@@ -12,9 +13,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
 import com.tubes.resepsijanda.databinding.ActivityMainBinding
+import cz.msebera.android.httpclient.Header
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private val TAG = MainActivity::class.java.simpleName
+    }
 
     private lateinit var binding: ActivityMainBinding
 
