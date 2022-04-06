@@ -12,10 +12,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.tubes.resepsijanda.databinding.ActivityMainBinding
+import com.tubes.resepsijanda.ui.discover.GridDiscoverAdapter
 
 class MainActivity : AppCompatActivity() {
-
+    private val list = ArrayList<Recipe>()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        binding.rvDiscover.setHasFixedSize(true)
+        list.addAll(getListRecipe())
+        showDiscoverGrid()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,5 +68,30 @@ class MainActivity : AppCompatActivity() {
 
         })
         return true
+    }
+
+    fun getListRecipe():ArrayList<Recipe>{
+        val nameRecipe = resources.getStringArray(R.array.name_recipe)
+        val dataCategory = resources.getStringArray(R.array.category_recipe)
+        val dataRecipe = resources.getStringArray(R.array.recipe)
+        val dataPhoto = resources.getStringArray(R.array.photo_recipe)
+
+        val listRecipe = ArrayList<Recipe>()
+        for (position in nameRecipe.indices){
+            val recipe = Recipe(
+                nameRecipe[position],
+                dataCategory[position],
+                dataRecipe[position],
+                dataPhoto[position]
+            )
+            listRecipe.add(recipe)
+        }
+        return listRecipe
+    }
+
+    private fun showDiscoverGrid(){
+        binding.rvDiscover.layoutManager = GridLayoutManager(this, 2)
+        val gridDiscoverAdapter = GridDiscoverAdapter(list)
+        binding.rvDiscover.adapter = gridDiscoverAdapter
     }
 }

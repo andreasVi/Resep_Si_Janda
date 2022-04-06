@@ -6,4 +6,28 @@
     <string name="search">Search</string>
     <string name="search_hint">Search</string>
     <string name="resep_si_janda">Resep Si Janda</string>
+    
+    <string-array name="name_recipe">
+        <item>Ayam Goreng Pedas</item>
+        <item>Nasi Goreng Seafood</item>
+        <item>Nasi Kuning Tumpeng</item>
+    </string-array>
+
+    <string-array name="category_recipe">
+        <item>Ayam Goreng</item>
+        <item>Nasi Goreng</item>
+        <item>Nasi Kuning</item>
+    </string-array>
+
+    <string-array name="recipe">
+        <item>Ayam</item>
+        <item>Nasi</item>
+        <item>kunyit</item>
+    </string-array>
+
+    <string-array name="photo_recipe">
+        <item>@drawable/ayam_goreng_pedas</item>
+        <item>@drawable/nasi_goreng</item>
+        <item>@drawable/nasi_kuning</item>
+    </string-array>
 </resources>
