@@ -29,7 +29,7 @@ class GridDiscoverAdapter (private val listRecipeCategory: ArrayList<Recipe>) : 
             with(binding){
                 Glide.with(itemView.context)
                     .load(recipe.photo)
-                    .apply(RequestOptions().override(550,550))
+                    .apply(RequestOptions().override(250,550))
                     .into(imgDiscoverPhoto)
 
                 tvDicover.text = recipe.category
