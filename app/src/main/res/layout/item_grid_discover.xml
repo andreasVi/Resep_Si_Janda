@@ -7,13 +7,13 @@
     <TextView
         android:id="@+id/tv_discover"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <ImageButton
         android:id="@+id/img_discover_photo"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="1dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
 </LinearLayout>

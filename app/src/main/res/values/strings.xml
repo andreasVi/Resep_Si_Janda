@@ -7,14 +7,14 @@
     <string name="search_hint">Search</string>
     <string name="resep_si_janda">Resep Si Janda</string>
 
-    <string-array name="category_name">
+    <string-array name="name_category">
         <item>Indonesian</item>
         <item>Chinese</item>
         <item>Western</item>
         <item>Japanese</item>
     </string-array>
 
-    <string-array name="category_photo">
+    <string-array name="photo_category">
         <item>https://wallpaperaccess.com/full/2012861.jpg</item>
         <item>https://wallpaperaccess.com/full/1401021.jpg</item>
         <item>https://c4.wallpaperflare.com/wallpaper/303/793/304/buffet-meal-food-brunch-wallpaper-preview.jpg</item>
