@@ -24,11 +24,11 @@ class GridCategoryAdapter(private val listCategory: ArrayList<Category>) : Recyc
 
     inner class GridViewHolder(private val binding: ItemGridCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
-            Glide.with(itemView.context)
-                .load(category.photo)
-                .apply(RequestOptions().override(500, 550))
-                .into(category_item_photo)
-            }
+//            Glide.with(itemView.context)
+//                .load(category.photo)
+//                .apply(RequestOptions().override(500, 550))
+//                .into(category_item_photo)
+//            }
         }
     }
 }
