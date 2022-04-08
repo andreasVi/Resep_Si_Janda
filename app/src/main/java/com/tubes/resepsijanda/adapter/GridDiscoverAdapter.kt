@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tubes.resepsijanda.entity.Recipe
 import com.tubes.resepsijanda.databinding.FragmentDiscoverBinding
-import com.tubes.resepsijanda.databinding.ItemGridCategoryBinding
+import com.tubes.resepsijanda.databinding.ItemGridDiscoverBinding
 
 class GridDiscoverAdapter (private val listRecipeCategory: ArrayList<Recipe>) : RecyclerView.Adapter<GridDiscoverAdapter.GridViewHolder>(){
 
@@ -15,7 +15,7 @@ class GridDiscoverAdapter (private val listRecipeCategory: ArrayList<Recipe>) : 
         viewGroup: ViewGroup,
         viewType: Int
     ): GridViewHolder {
-        val binding = ItemGridCategoryBinding.inflate(LayoutInflater.from(viewGroup.context),viewGroup, false)
+        val binding = ItemGridDiscoverBinding.inflate(LayoutInflater.from(viewGroup.context),viewGroup, false)
         return GridViewHolder(binding)
     }
 
@@ -24,7 +24,7 @@ class GridDiscoverAdapter (private val listRecipeCategory: ArrayList<Recipe>) : 
     }
 
     override fun getItemCount(): Int = listRecipeCategory.size
-    inner class GridViewHolder(private val binding: ItemGridCategoryBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class GridViewHolder(private val binding: ItemGridDiscoverBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(recipe: Recipe){
             with(binding){
                 Glide.with(itemView.context)
@@ -32,7 +32,7 @@ class GridDiscoverAdapter (private val listRecipeCategory: ArrayList<Recipe>) : 
                     .apply(RequestOptions().override(250,250))
                     .into(imgDiscoverPhoto)
 
-                tvDicover.text = recipe.category
+                tvDiscover.text = recipe.category
             }
         }
     }
