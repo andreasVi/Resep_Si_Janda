@@ -28,8 +28,8 @@
     </string-array>
 
     <string-array name="photo_recipe">
-        <item>@drawable/ayam_goreng_pedas</item>
-        <item>@drawable/nasi_goreng</item>
-        <item>@drawable/nasi_kuning</item>
+        <item>https://wallpaperaccess.com/full/2012861.jpg</item>
+        <item>https://wallpaperaccess.com/full/1401021.jpg</item>
+        <item>https://wallpaperaccess.com/full/1321696.jpg</item>
     </string-array>
 </resources>
