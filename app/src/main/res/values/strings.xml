@@ -20,4 +20,16 @@
         <item>https://</item>
         <item>https://</item>
     </string-array>
+    
+    <string-array name="category_recipe">
+        <item>Ayam Goreng</item>
+        <item>Nasi Goreng</item>
+        <item>Nasi Kuning</item>
+    </string-array>
+
+    <string-array name="photo_recipe">
+        <item>@drawable/ayam_goreng_pedas</item>
+        <item>@drawable/nasi_goreng</item>
+        <item>@drawable/nasi_kuning</item>
+    </string-array>
 </resources>
