@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showHomeGrid(){
-        binding.rvCategory.layoutManager = GridLayoutManager(context, 2)
+        binding.rvCategory.layoutManager = GridLayoutManager(context, 1)
         val gridHomeAdapter = GridHomeAdapter(list)
         binding.rvCategory.adapter = gridHomeAdapter
     }
