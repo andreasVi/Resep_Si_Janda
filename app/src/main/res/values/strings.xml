@@ -5,6 +5,11 @@
     <string name="title_myrecipes">My Recipes</string>
     <string name="search">Search</string>
     <string name="search_hint">Search</string>
+    <string name="login">Login</string>
+    <string name="login_caption">Login to your account.</string>
+    <string name="register">Register Account</string>
+    <string name="register_caption">Register your account.</string>
+    <string name="no_account">Don\'t have an account? Register.</string>
     <string name="resep_si_janda">Resep Si Janda</string>
 
     <string-array name="name_category">
@@ -20,7 +25,7 @@
         <item>https://c4.wallpaperflare.com/wallpaper/303/793/304/buffet-meal-food-brunch-wallpaper-preview.jpg</item>
         <item>https://wallpaperaccess.com/full/1321696.jpg</item>
     </string-array>
-    
+
     <string-array name="category_recipe">
         <item>Ayam Goreng</item>
         <item>Nasi Goreng</item>

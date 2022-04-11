@@ -3,25 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/layout/fragment_discover.xml" value="0.264" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/layout/fragment_myrecipes.xml" value="0.264" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/layout/item_grid_category.xml" value="0.25416666666666665" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
-        <entry key="..\:/Aristo/Kuliah/Smt_6/PPB/Resep_Si_Janda/app/src/main/res/menu/search_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_main.xml" value="0.6" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/fragment_discover.xml" value="0.25" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/fragment_myrecipes.xml" value="0.25" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/item_grid_category.xml" value="0.1" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/item_grid_discover.xml" value="0.1" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/item_grid_home.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/menu/search_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/activity_main.xml" value="0.22121896162528218" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/activity_register.xml" value="0.18" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/fragment_myrecipes.xml" value="0.1644021739130435" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/item_grid_category.xml" value="0.25" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/Resep_Si_Janda/app/src/main/res/layout/item_grid_home.xml" value="0.22" />
       </map>
     </option>
   </component>
