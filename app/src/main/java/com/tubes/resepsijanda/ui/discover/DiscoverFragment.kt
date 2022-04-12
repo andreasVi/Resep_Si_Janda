@@ -15,6 +15,7 @@ import com.tubes.resepsijanda.databinding.FragmentDiscoverBinding
 class DiscoverFragment : Fragment() {
     private val list = ArrayList<Recipe>()
     private var _binding: FragmentDiscoverBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
