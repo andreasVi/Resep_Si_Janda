@@ -9,6 +9,7 @@ import com.tubes.resepsijanda.entity.Category
 import com.tubes.resepsijanda.databinding.ItemGridHomeBinding
 
 class GridHomeAdapter(private val listCategory: ArrayList<Category>) : RecyclerView.Adapter<GridHomeAdapter.GridViewHolder>() {
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GridViewHolder {
         val binding = ItemGridHomeBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return GridViewHolder(binding)
@@ -27,6 +28,8 @@ class GridHomeAdapter(private val listCategory: ArrayList<Category>) : RecyclerV
                     .load(category.photo)
                     .apply(RequestOptions().override(500, 550))
                     .into(imgHomePhoto)
+
+                tvHome.text = category.name
             }
         }
     }
