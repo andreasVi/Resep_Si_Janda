@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "89081355089",
+    "project_id": "resep-si-janda",
+    "storage_bucket": "resep-si-janda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89081355089:android:9d709b486393d681749170",
+        "android_client_info": {
+          "package_name": "com.tubes.resepsijanda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89081355089-hn99sg9a8j9dpqd2odkhif9eg2fbs3r8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tubes.resepsijanda",
+            "certificate_hash": "d8f6b76d019840b2581b0f3dfcf766b024decde0"
+          }
+        },
+        {
+          "client_id": "89081355089-etnvrj78865rb7rl3pgl4en1n9kbpskq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf1aay3fMQHwOfrDjy7Dl9aCXqLvCX0d4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89081355089-etnvrj78865rb7rl3pgl4en1n9kbpskq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
