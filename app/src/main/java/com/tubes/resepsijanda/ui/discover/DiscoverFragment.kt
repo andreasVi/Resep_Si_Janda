@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tubes.resepsijanda.R
 import com.tubes.resepsijanda.adapter.GridDiscoverAdapter
-import com.tubes.resepsijanda.entity.Recipe
+import com.tubes.resepsijanda.entity.Discover
 import com.tubes.resepsijanda.databinding.FragmentDiscoverBinding
 
 class DiscoverFragment : Fragment() {
-    private val list = ArrayList<Recipe>()
+    private val list = ArrayList<Discover>()
     private var _binding: FragmentDiscoverBinding? = null
 
     // This property is only valid between onCreateView and
@@ -46,13 +46,13 @@ class DiscoverFragment : Fragment() {
         _binding = null
     }
 
-    fun getListRecipe():ArrayList<Recipe>{
+    fun getListRecipe():ArrayList<Discover>{
         val dataCategory = resources.getStringArray(R.array.category_recipe)
         val dataPhoto = resources.getStringArray(R.array.photo_recipe)
 
-        val listRecipe = ArrayList<Recipe>()
+        val listRecipe = ArrayList<Discover>()
         for (position in dataCategory.indices){
-            val recipe = Recipe(
+            val recipe = Discover(
                 dataCategory[position],
                 dataPhoto[position]
             )
