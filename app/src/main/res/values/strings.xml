@@ -11,6 +11,7 @@
     <string name="register_caption">Register your account.</string>
     <string name="no_account">Don\'t have an account? Register.</string>
     <string name="resep_si_janda">Resep Si Janda</string>
+    <string name="view_recipes">View Recipe</string>
 
     <string-array name="name_category">
         <item>Indonesian</item>
