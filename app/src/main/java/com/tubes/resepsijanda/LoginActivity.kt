@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tubes.resepsijanda.databinding.ActivityLoginBinding
 import com.tubes.resepsijanda.ui.myrecipes.MyRecipesFragment
 
@@ -44,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
 
         // init firebaseAuth
+        firebaseAuth = Firebase.auth
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
@@ -54,8 +58,9 @@ class LoginActivity : AppCompatActivity() {
 
         // handle click, begin login
         binding.btnLogin.setOnClickListener {
-            // before loggin in, validate data
-            validateData()
+            // before login in, validate data
+//            validateData()
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -91,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Logged in as $email", Toast.LENGTH_SHORT).show()
 
                 // open my recipes (profile)
-                startActivity(Intent(this, MyRecipesFragment::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             .addOnFailureListener { e->
