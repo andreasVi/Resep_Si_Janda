@@ -1,5 +1,6 @@
 package com.tubes.resepsijanda.ui.discover
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import com.tubes.resepsijanda.R
 import com.tubes.resepsijanda.adapter.GridDiscoverAdapter
 import com.tubes.resepsijanda.entity.Discover
 import com.tubes.resepsijanda.databinding.FragmentDiscoverBinding
+import com.tubes.resepsijanda.databinding.ItemGridDiscoverBinding
+import com.tubes.resepsijanda.ui.recipe.ListRecipe
 
 class DiscoverFragment : Fragment() {
     private val list = ArrayList<Discover>()
@@ -31,10 +34,6 @@ class DiscoverFragment : Fragment() {
         _binding = FragmentDiscoverBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textDiscover
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         binding.rvDiscover.setHasFixedSize(true)
         list.addAll(getListRecipe())
         showDiscoverGrid()
@@ -47,8 +46,8 @@ class DiscoverFragment : Fragment() {
     }
 
     fun getListRecipe():ArrayList<Discover>{
-        val dataCategory = resources.getStringArray(R.array.category_recipe)
-        val dataPhoto = resources.getStringArray(R.array.photo_recipe)
+        val dataCategory = resources.getStringArray(R.array.category_recipe_diet)
+        val dataPhoto = resources.getStringArray(R.array.image_recipe_diet)
 
         val listRecipe = ArrayList<Discover>()
         for (position in dataCategory.indices){

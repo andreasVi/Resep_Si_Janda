@@ -10,6 +10,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.tubes.resepsijanda.adapter.ListRecipesAdapter
 import com.tubes.resepsijanda.databinding.ActivityListRecipeBinding
 import com.tubes.resepsijanda.entity.Recipe
+import com.tubes.resepsijanda.util.constant.Companion.discover
+import com.tubes.resepsijanda.util.constant.Companion.key
+import com.tubes.resepsijanda.util.constant.Companion.qty
+import com.tubes.resepsijanda.util.constant.Companion.search
+import com.tubes.resepsijanda.util.constant.Companion.spoonacular
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 
@@ -26,13 +31,16 @@ class ListRecipe : AppCompatActivity() {
 
         binding.rvRecipes.setHasFixedSize(true)
 
-        getRecipes()
+        getRecipesfromApi()
     }
 
-    fun getRecipes(){
+    fun getRecipesfromApi(){
+        val nameDiscover = intent.getStringExtra("name_discover")
+        title = nameDiscover
+
         val client = AsyncHttpClient()
         val listRecipes = ArrayList<Recipe>()
-        val url = "https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=4b526d8bbcca475cbaaee525f01065db"
+        val url = spoonacular + discover + nameDiscover + qty + key
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
