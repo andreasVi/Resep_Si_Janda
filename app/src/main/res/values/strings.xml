@@ -11,6 +11,7 @@
     <string name="register_caption">Register your account.</string>
     <string name="no_account">Don\'t have an account? Register.</string>
     <string name="resep_si_janda">Resep Si Janda</string>
+    <string name="view_recipes">View Recipe</string>
 
     <string-array name="name_category">
         <item>Indonesian</item>
@@ -26,15 +27,17 @@
         <item>https://wallpaperaccess.com/full/1321696.jpg</item>
     </string-array>
 
-    <string-array name="category_recipe">
-        <item>Ayam Goreng</item>
-        <item>Nasi Goreng</item>
-        <item>Nasi Kuning</item>
+    <string-array name="category_recipe_diet">
+        <item>Ketogenic</item>
+        <item>Vegetarian</item>
+        <item>Vegan</item>
+        <item>Paleo</item>
     </string-array>
 
-    <string-array name="photo_recipe">
-        <item>https://wallpaperaccess.com/full/2012861.jpg</item>
-        <item>https://wallpaperaccess.com/full/1401021.jpg</item>
-        <item>https://wallpaperaccess.com/full/1321696.jpg</item>
+    <string-array name="image_recipe_diet">
+        <item>https://res.cloudinary.com/dk0z4ums3/image/upload/v1589917662/attached_image/diet-keto-ketahui-manfaat-cara-menjalani-dan-risikonya.jpg</item>
+        <item>https://images-prod.healthline.com/hlcmsresource/images/AN_images/vegetarian-diet-plan-1296x728-feature.jpg</item>
+        <item>https://www.news-medical.net/image.axd?picture=2021%2F3%2Fshutterstock_1652895442.jpg</item>
+        <item>https://cdn.hellosehat.com/wp-content/uploads/2016/09/paleo-diet.jpg</item>
     </string-array>
 </resources>

@@ -50,8 +50,8 @@ class MyRecipesFragment : Fragment() {
     }
 
     fun getListFavorite():ArrayList<Favorite>{
-        val dataName = resources.getStringArray(R.array.category_recipe)
-        val dataPhoto = resources.getStringArray(R.array.photo_category)
+        val dataName = resources.getStringArray(R.array.category_recipe_diet)
+        val dataPhoto = resources.getStringArray(R.array.image_recipe_diet)
 
         val listFavorite = ArrayList<Favorite>()
         for (position in dataName.indices){
