@@ -46,8 +46,8 @@ class DiscoverFragment : Fragment() {
     }
 
     fun getListRecipe():ArrayList<Discover>{
-        val dataCategory = resources.getStringArray(R.array.category_recipe_diet)
-        val dataPhoto = resources.getStringArray(R.array.image_recipe_diet)
+        val dataCategory = resources.getStringArray(R.array.category_recipe)
+        val dataPhoto = resources.getStringArray(R.array.image_category_recipe)
 
         val listRecipe = ArrayList<Discover>()
         for (position in dataCategory.indices){

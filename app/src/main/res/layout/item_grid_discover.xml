@@ -16,8 +16,7 @@
         android:id="@+id/img_discover_photo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_margin="10dp"
         android:scaleType="centerCrop" />
 
 </LinearLayout>
