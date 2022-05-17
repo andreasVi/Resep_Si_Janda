@@ -73,6 +73,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     val image = responseObject.getString("image")
                     val readyInMinutes = responseObject.getString("readyInMinutes")
                     val summary = responseObject.getString("summary")
+                    val instructions = responseObject.getString("instructions")
 
                     //Menampilkan data yang diambil dari API ke activity detail recipe
                     //Menampilkan nama resep
@@ -88,20 +89,20 @@ class DetailRecipeActivity : AppCompatActivity() {
 
                     //Menampilkan waktu yang dibutuhkan untuk membuat resep ini
                     val time: TextView = findViewById(R.id.tv_time)
-                    time.text = readyInMinutes
+                    time.text = String.format(getString(R.string.minutes), readyInMinutes)
 
                     //Deskripsi mengenai resep ini
                     val description: TextView = findViewById(R.id.tv_description)
                     description.text = Html.fromHtml(summary)
 
                     //Untuk mengambil data ingredients
-                    val jsonArray = responseObject.getJSONArray("extendedIngredients")
-                    for (i in 0 until jsonArray.length()){
-                        val idIngredients = jsonArray.getJSONObject(i).getInt("id")
-                        val nameIngredients = jsonArray.getJSONObject(i).getString("name")
-                        val imgIngredients = "https://spoonacular.com/cdn/ingredients_100x100/" + jsonArray.getJSONObject(i).getString("image")
-                        val amountIngredients = jsonArray.getJSONObject(i).getInt("amount")
-                        val unitIngredients = jsonArray.getJSONObject(i).getString("unit")
+                    val jsonArrayIngredient = responseObject.getJSONArray("extendedIngredients")
+                    for (i in 0 until jsonArrayIngredient.length()){
+                        val idIngredients = jsonArrayIngredient.getJSONObject(i).getInt("id")
+                        val nameIngredients = jsonArrayIngredient.getJSONObject(i).getString("name")
+                        val imgIngredients = "https://spoonacular.com/cdn/ingredients_100x100/" + jsonArrayIngredient.getJSONObject(i).getString("image")
+                        val amountIngredients = jsonArrayIngredient.getJSONObject(i).getDouble("amount")
+                        val unitIngredients = jsonArrayIngredient.getJSONObject(i).getString("unit")
 
                         val ingredients = Ingredients(
                             idIngredients,
@@ -114,6 +115,17 @@ class DetailRecipeActivity : AppCompatActivity() {
                         listIngredients.add(ingredients)
                     }
                     showRecyclerListIngredients(listIngredients)
+
+                    //Set instruction
+                    val instruction: TextView = findViewById(R.id.tv_instructions)
+                    if (instructions == "null"){
+                        instruction.text = Html.fromHtml("<i>There is no Instruction</i>")
+                    }else{
+                        instruction.text = Html.fromHtml(instructions)
+                    }
+                    Log.d(TAG, instruction.toString())
+
+
 
                 }catch (e:Exception){
                     Toast.makeText(this@DetailRecipeActivity, e.message, Toast.LENGTH_SHORT).show()
