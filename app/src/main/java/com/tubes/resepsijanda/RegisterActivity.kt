@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.firebase.auth.FirebaseAuth
@@ -13,10 +17,10 @@ import com.tubes.resepsijanda.databinding.ActivityLoginBinding
 import com.tubes.resepsijanda.databinding.ActivityRegisterBinding
 import com.tubes.resepsijanda.ui.myrecipes.MyRecipesFragment
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
-    // ViewBinding
-    private lateinit var binding: ActivityRegisterBinding
+//    // ViewBinding
+//    private lateinit var binding: ActivityRegisterBinding
 
     // ActionBar
     private lateinit var actionBar: ActionBar
@@ -29,9 +33,12 @@ class RegisterActivity : AppCompatActivity() {
     private var email = ""
     private var password = ""
 
+    private lateinit var registerEmail : EditText
+    private lateinit var registerPassword: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+//        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
 
         // configure actionbar and enable back button
@@ -49,28 +56,47 @@ class RegisterActivity : AppCompatActivity() {
         // init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // handle click, begin register
-        binding.btnRegister.setOnClickListener {
-            //validate data
-            validateData()
+        registerEmail = findViewById(R.id.register_email)
+        registerPassword = findViewById(R.id.register_password)
+
+        val btnRegister: Button = findViewById(R.id.btn_register)
+        btnRegister.setOnClickListener(this)
+
+//        // handle click, begin register
+//        binding.btnRegister.setOnClickListener {
+//            //validate data
+//            validateData()
+//        }
+    }
+
+    override fun onClick(v: View) {
+        when(v.id){
+            R.id.btn_register -> {
+                validateData()
+            }
         }
     }
 
     private fun validateData() {
         // get data
-        email = binding.registerEmail.text.toString().trim()
-        password = binding.registerPassword.text.toString().trim()
+//        email = binding.registerEmail.text.toString().trim()
+//        password = binding.registerPassword.text.toString().trim()
+        email = registerEmail.getText().toString().trim()
+        password = registerPassword.getText().toString().trim()
 
         // validate data
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             // invalid email format
-            binding.registerEmail.error = "Invalid email format."
+//            binding.registerEmail.error = "Invalid email format."
+            registerEmail.setError("Invalid email format.")
         } else if (TextUtils.isEmpty(password)) {
             // no password entered
-            binding.registerPassword.error = "Please enter your password."
+//            binding.registerPassword.error = "Please enter your password."
+            registerPassword.setError("Please enter your password.")
         } else if (password.length < 6) {
             // password length is less than 6
-            binding.registerPassword.error = "Password must be at least 6 characters long."
+//            binding.registerPassword.error = "Password must be at least 6 characters long."
+            registerPassword.setError("Password must be at least 6 characters long.")
         } else {
             firebaseRegister()
         }
@@ -92,7 +118,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Account created with email $email", Toast.LENGTH_SHORT).show()
 
                 // open my recipe (profile)
-                startActivity(Intent(this, MyRecipesFragment::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             .addOnFailureListener { e->
