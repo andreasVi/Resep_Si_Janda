@@ -17,7 +17,6 @@ import com.tubes.resepsijanda.databinding.ActivityLoginBinding
 import com.tubes.resepsijanda.ui.myrecipes.MyRecipesFragment
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
-
     // ViewBinding
 //    private lateinit var binding: ActivityLoginBinding
 
@@ -120,7 +119,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "Logged in as $email", Toast.LENGTH_SHORT).show()
 
                 // open my recipes (profile)
-                startActivity(Intent(this, MyRecipesFragment::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             .addOnFailureListener { e->
@@ -137,7 +136,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null) {
             // user is already logged in
-            startActivity(Intent(this, MyRecipesFragment::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
