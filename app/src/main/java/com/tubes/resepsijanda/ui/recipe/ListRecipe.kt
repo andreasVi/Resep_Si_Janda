@@ -10,6 +10,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.tubes.resepsijanda.adapter.ListRecipesAdapter
 import com.tubes.resepsijanda.databinding.ActivityListRecipeBinding
 import com.tubes.resepsijanda.entity.Recipe
+import com.tubes.resepsijanda.util.constant.Companion.compSearch
 import com.tubes.resepsijanda.util.constant.Companion.discover
 import com.tubes.resepsijanda.util.constant.Companion.key
 import com.tubes.resepsijanda.util.constant.Companion.qty
@@ -40,7 +41,7 @@ class ListRecipe : AppCompatActivity() {
 
         val client = AsyncHttpClient()
         val listRecipes = ArrayList<Recipe>()
-        val url = spoonacular + discover + nameDiscover + qty + key
+        val url = spoonacular + compSearch + discover + nameDiscover + qty +key
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
@@ -55,10 +56,12 @@ class ListRecipe : AppCompatActivity() {
                     val jsonArray = responseObject.getJSONArray("results")
 
                     for (i in 0 until jsonArray.length()){
+                        val id = jsonArray.getJSONObject(i).getInt("id")
                         val title = jsonArray.getJSONObject(i).getString("title")
                         val image = jsonArray.getJSONObject(i).getString("image")
 
                         val recipe = Recipe(
+                            id,
                             title,
                             image
                         )
