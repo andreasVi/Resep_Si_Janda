@@ -35,11 +35,12 @@ class ListRecipesAdapter(private val listRecipes: ArrayList<Recipe>) : RecyclerV
                     .into(imgFood)
 
                 tvTitle.text = recipe.name
+                val id = recipe.id
+
                 btnRecipe.setOnClickListener{
                     Log.d(TAG, "Choose recipe ${recipe.name}")
                     val intent = Intent(itemView.context, DetailRecipeActivity::class.java)
-                    intent.putExtra("image_url", recipe.photo)
-                    intent.putExtra("name_recipe", recipe.name)
+                    intent.putExtra("id_recipe", id)
                     itemView.context.startActivity(intent)
                 }
             }

@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_detail_recipe.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_detail_recipe.xml" value="0.4" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_list_recipe.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/activity_main.xml" value="0.35239567233384855" />
@@ -14,6 +14,7 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/fragment_myrecipes.xml" value="0.25" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/item_card_recipe.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/item_grid_discover.xml" value="0.4007936507936508" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/layout/item_ingredients.xml" value="0.4" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/menu/search_menu.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/ResepSiJanda/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1275" />
