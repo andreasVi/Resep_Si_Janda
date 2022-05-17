@@ -99,7 +99,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()){
                         val idIngredients = jsonArray.getJSONObject(i).getInt("id")
                         val nameIngredients = jsonArray.getJSONObject(i).getString("name")
-                        val imgIngredients = jsonArray.getJSONObject(i).getString("image")
+                        val imgIngredients = "https://spoonacular.com/cdn/ingredients_100x100/" + jsonArray.getJSONObject(i).getString("image")
                         val amountIngredients = jsonArray.getJSONObject(i).getInt("amount")
                         val unitIngredients = jsonArray.getJSONObject(i).getString("unit")
 
@@ -110,6 +110,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                             amountIngredients,
                             unitIngredients
                         )
+                        Log.d(TAG, imgIngredients)
                         listIngredients.add(ingredients)
                     }
                     showRecyclerListIngredients(listIngredients)
