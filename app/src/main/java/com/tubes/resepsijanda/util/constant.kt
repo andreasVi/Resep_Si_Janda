@@ -6,7 +6,7 @@ class constant {
         const val compSearch = "complexSearch?"
         const val information = "/information?includeNutrition=false"
         const val search = "query="
-        const val discover = "diet="
+        const val discover = "type="
         const val qty = "&number=20"
         const val key = "&apiKey=4b526d8bbcca475cbaaee525f01065db"
     }
