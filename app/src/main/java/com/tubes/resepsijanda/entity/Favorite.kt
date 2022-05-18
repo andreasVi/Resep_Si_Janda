@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Favorite (
-    var favorite: String,
+    var id: Int,
+    var name: String,
     var photo: String
 ) : Parcelable
