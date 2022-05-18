@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         // init firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
+//        checkUser()
 
         loginEmail = findViewById(R.id.login_email)
         loginPassword = findViewById(R.id.login_password)
@@ -129,15 +129,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    private fun checkUser() {
-        // if user is already logged in go to profile activity
-
-        // get current user
-        val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null) {
-            // user is already logged in
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-    }
+//    private fun checkUser() {
+//        // if user is already logged in go to profile activity
+//
+//        // get current user
+//        val firebaseUser = firebaseAuth.currentUser
+//        if (firebaseUser != null) {
+//            // user is already logged in
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
+//    }
 }

@@ -1,25 +1,50 @@
 package com.tubes.resepsijanda.ui.myrecipes
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import com.tubes.resepsijanda.LoginActivity
+import com.tubes.resepsijanda.MainActivity
 import com.tubes.resepsijanda.R
 import com.tubes.resepsijanda.adapter.CardFavoritesAdapter
 import com.tubes.resepsijanda.databinding.FragmentMyrecipesBinding
+import com.tubes.resepsijanda.databinding.ItemCardFavoriteBinding
 import com.tubes.resepsijanda.entity.Category
 import com.tubes.resepsijanda.entity.Favorite
+import com.tubes.resepsijanda.entity.Recipe
+import com.tubes.resepsijanda.ui.recipe.ListRecipe
+import com.tubes.resepsijanda.util.constant
+import com.tubes.resepsijanda.util.constant.Companion.information
+import com.tubes.resepsijanda.util.constant.Companion.key
+import com.tubes.resepsijanda.util.constant.Companion.spoonacular
+import cz.msebera.android.httpclient.Header
+import org.json.JSONObject
 
-class MyRecipesFragment : Fragment(), View.OnClickListener {
+class MyRecipesFragment : Fragment() {
     private val list = ArrayList<Favorite>()
     private var _binding: FragmentMyrecipesBinding? = null
+    companion object{
+        private val TAG = MyRecipesFragment::class.java.simpleName
+    }
+//    private lateinit var btnLogout: Button
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -27,83 +52,157 @@ class MyRecipesFragment : Fragment(), View.OnClickListener {
 
     //init firebase auth
     val firebaseAuth = FirebaseAuth.getInstance()
+    val firebaseUser = firebaseAuth.currentUser
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-//        checkUser()
-
-        val view: View = inflater!!.inflate(R.layout.fragment_myrecipes, container, false)
-        val btnLogout : Button = view.findViewById(R.id.btn_logout)
-
-        btnLogout.setOnClickListener(this)
-        
-        val notificationsViewModel =
-            ViewModelProvider(this).get(MyRecipesViewModel::class.java)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMyrecipesBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+//        val view: View = inflater!!.inflate(R.layout.fragment_myrecipes, container, false)
+//        btnLogout = view.findViewById(R.id.button_logout)
+////
+//        btnLogout.setOnClickListener { view ->
+//            Log.d("button", ": clicked")
+//        }
+        
+//        val notificationsViewModel =
+//            ViewModelProvider(this).get(MyRecipesViewModel::class.java)
+
+        //To check if user is logged in
+        checkUser()
+
+        //Logout button
+        binding.buttonLogout.setOnClickListener{
+            Log.d("clicked", ": Logout Success")
+            firebaseAuth.signOut()
+            startActivity(Intent(getActivity(), MainActivity::class.java))
+        }
 
 ////      val textView: TextView = binding.textMyrecipes
 //        notificationsViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+
         binding.rvMyRecipes.setHasFixedSize(true)
-        list.addAll(getListFavorite())
-        showFavoriteRecipe()
+        getFavorites()
         return root
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_logout -> {
-                firebaseAuth.signOut()
-                // checkUser()
-            }
-        }
-    }
+//    override fun onClick(v: View?) {
+//        when (v?.id) {
+//            R.id.button_logout -> {
+//                firebaseAuth.signOut()
+//                // checkUser()
+//            }
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-//    private fun checkUser() {
-//        // check user is logged in or not
-//        val firebaseUser = firebaseAuth.currentUser
-//        if (firebaseUser != null) {
-//            // user not null, user is logged in, get user info
-//            val email = firebaseUser.email
-//            // set to text view
-//            binding.textView.text = email
-//        }else {
-//            // user is null, user is not logged in
-//            startActivity(Intent(getActivity(), LoginActivity::class.java))
-//        }
-//    }
+    private fun checkUser() {
+        // check user is logged in or not
+        if (firebaseUser != null) {
+            // user not null, user is logged in, get user info
+            val email = firebaseUser.email
+            Log.d("email",email!!)
 
-    fun getListFavorite():ArrayList<Favorite>{
-        val dataName = resources.getStringArray(R.array.category_recipe)
-        val dataPhoto = resources.getStringArray(R.array.image_category_recipe)
-        val dataID = 0
+            //Get data from fire store
+            getDataFromDb(email)
 
-        val listFavorite = ArrayList<Favorite>()
-        for (position in dataName.indices){
-            val favorite = Favorite(
-                dataID,
-                dataName[position],
-                dataPhoto[position]
-            )
-            listFavorite.add(favorite)
+        }else {
+            // user is null, user is not logged in
+            startActivity(Intent(getActivity(), LoginActivity::class.java))
         }
-        return listFavorite
     }
 
-    private fun showFavoriteRecipe(){
-        binding.rvMyRecipes.layoutManager = GridLayoutManager(context, 1)
-        val cardMyRecipesAdapter = CardFavoritesAdapter(list)
+    private fun getDataFromDb(email: String){
+        val db = Firebase.firestore
+        val docRef = db.collection("users").document(email)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val data = document.data
+                    val image = data!!.get("image").toString()
+                    val name = data!!.get("name").toString()
+                    Log.d("Document data: ", " image = $image name = $name")
+
+                    //Set username by logged in user
+                    binding.userName.text = name
+
+                    //Set user image by logged in user
+                    Glide.with(this)
+                        .load(image)
+                        .into(binding.userImage);
+
+                } else {
+                    Log.d("Document data: ", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Document data: ", "get failed with ", exception)
+            }
+    }
+
+    fun getFavorites(){
+        //dummy list of id which is added to favorites
+        val listFavoritesID = arrayOf(664429, 658007, 715569, 643450, 642780)
+        val client = AsyncHttpClient()
+        val listFavoriteRecipes = ArrayList<Favorite>()
+//        Log.d("favorite count: ", "${listFavoritesID.size}")
+        for (i in 0 until listFavoritesID.size){
+            val url = spoonacular + listFavoritesID[i] + information + key
+            client.get(url, object : AsyncHttpResponseHandler() {
+                override fun onSuccess(
+                    statusCode: Int,
+                    headers: Array<out Header>,
+                    responseBody: ByteArray
+                ) {
+                    //if connection success
+                    val result = String(responseBody)
+                    Log.d(TAG, result)
+                    try {
+                        val responseObject = JSONObject(result)
+                        val id = responseObject.getInt("id")
+                        val title = responseObject.getString("title")
+                        val image = responseObject.getString("image")
+
+                        val favorites = Favorite(
+                            id,
+                            title,
+                            image
+                        )
+                        listFavoriteRecipes.add(favorites)
+                        showFavoriteRecipe(listFavoriteRecipes)
+                    }catch (e:Exception){
+                        Toast.makeText(requireActivity(), e.message, Toast.LENGTH_SHORT).show()
+                        e.printStackTrace()
+                    }
+                }
+                override fun onFailure(
+                    statusCode: Int,
+                    headers: Array<out Header>,
+                    responseBody: ByteArray,
+                    error: Throwable
+                ) {
+                    //Jika koneksi gagal
+                    val errorMessage = when (statusCode) {
+                        401 -> "$statusCode : Bad Request"
+                        403 -> "$statusCode : Forbidden"
+                        404 -> "$statusCode : Not Found"
+                        else -> "$statusCode : ${error.message}"
+                    }
+                    Toast.makeText(requireActivity(), errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+    }
+
+    private fun showFavoriteRecipe(listFavoriteRecipes:ArrayList<Favorite>){
+        binding.rvMyRecipes.layoutManager = LinearLayoutManager(requireActivity())
+        val cardMyRecipesAdapter = CardFavoritesAdapter(listFavoriteRecipes)
         binding.rvMyRecipes.adapter = cardMyRecipesAdapter
     }
 }
