@@ -10,7 +10,10 @@
         android:id="@+id/rv_discover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="60dp"
         tools:listitem="@layout/item_grid_discover"/>
 
 </LinearLayout>

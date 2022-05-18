@@ -7,6 +7,7 @@ class constant {
         const val information = "/information?includeNutrition=false"
         const val search = "query="
         const val discover = "type="
+        const val home = "sort=popularity&number=50"
         const val qty = "&number=20"
         const val key = "&apiKey=4b526d8bbcca475cbaaee525f01065db"
     }
