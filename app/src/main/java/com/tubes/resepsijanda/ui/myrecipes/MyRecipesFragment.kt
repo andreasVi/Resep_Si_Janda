@@ -21,7 +21,7 @@ import com.tubes.resepsijanda.databinding.FragmentMyrecipesBinding
 import com.tubes.resepsijanda.entity.Category
 import com.tubes.resepsijanda.entity.Favorite
 
-class MyRecipesFragment : Fragment() {
+class MyRecipesFragment : Fragment(), View.OnClickListener {
     private val list = ArrayList<Favorite>()
     private var _binding: FragmentMyrecipesBinding? = null
 
@@ -39,13 +39,10 @@ class MyRecipesFragment : Fragment() {
     ): View {
 //        checkUser()
 
-        val view: View = inflater.inflate(R.layout.fragment_myrecipes, container, false)
+        val view: View = inflater!!.inflate(R.layout.fragment_myrecipes, container, false)
         val btnLogout : Button = view.findViewById(R.id.btn_logout)
 
-        btnLogout.setOnClickListener { view ->
-            firebaseAuth.signOut()
-//            checkUser()
-        }
+        btnLogout.setOnClickListener(this)
 
         val notificationsViewModel =
             ViewModelProvider(this).get(MyRecipesViewModel::class.java)
@@ -61,6 +58,15 @@ class MyRecipesFragment : Fragment() {
         list.addAll(getListFavorite())
         showMyrecipesGrid()
         return root
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_logout -> {
+                firebaseAuth.signOut()
+                // checkUser()
+            }
+        }
     }
 
     override fun onDestroyView() {
