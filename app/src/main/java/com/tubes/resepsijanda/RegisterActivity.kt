@@ -152,9 +152,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         // Add a new document with a generated ID
         dbFirestore.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d("Success","DocumentSnapshot added with ID: ${documentReference.id}")
+            .document(email).set(user)
+            .addOnSuccessListener {
+                Log.d("Success","DocumentSnapshot added with email: $email")
             }
             .addOnFailureListener { e ->
                 Log.w("Error adding document", e)
