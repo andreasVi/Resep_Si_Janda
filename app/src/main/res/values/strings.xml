@@ -13,6 +13,7 @@
     <string name="resep_si_janda">Resep Si Janda</string>
     <string name="view_recipes">View Recipe</string>
     <string name="minutes">Ready in %1$s minutes</string>
+    <string name="serving">Serving: %1$s</string>
 
     <string-array name="name_category">
         <item>Indonesian</item>

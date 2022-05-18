@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -74,6 +76,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     val readyInMinutes = responseObject.getString("readyInMinutes")
                     val summary = responseObject.getString("summary")
                     val instructions = responseObject.getString("instructions")
+                    val serving = responseObject.getString("servings")
 
                     //Menampilkan data yang diambil dari API ke activity detail recipe
                     //Menampilkan nama resep
@@ -84,7 +87,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     val imageTemp: ImageView = findViewById(R.id.img_recipe)
                     Glide.with(this@DetailRecipeActivity)
                         .load(image)
-                        .error(R.drawable.ic_launcher_background)
+                        .error(R.drawable.logo)
                         .into(imageTemp)
 
                     //Menampilkan waktu yang dibutuhkan untuk membuat resep ini
@@ -94,6 +97,9 @@ class DetailRecipeActivity : AppCompatActivity() {
                     //Deskripsi mengenai resep ini
                     val description: TextView = findViewById(R.id.tv_description)
                     description.text = Html.fromHtml(summary)
+
+                    val serve: TextView = findViewById(R.id.tv_serving)
+                    serve.text = String.format(getString(R.string.serving), serving)
 
                     //Untuk mengambil data ingredients
                     val jsonArrayIngredient = responseObject.getJSONArray("extendedIngredients")
@@ -125,8 +131,6 @@ class DetailRecipeActivity : AppCompatActivity() {
                     }
                     Log.d(TAG, instruction.toString())
 
-
-
                 }catch (e:Exception){
                     Toast.makeText(this@DetailRecipeActivity, e.message, Toast.LENGTH_SHORT).show()
                     e.printStackTrace()
@@ -156,5 +160,23 @@ class DetailRecipeActivity : AppCompatActivity() {
         val listiewRecipeAdapter = ListIngredientsAdapter(listIngredient)
         binding.rvIngredients.adapter = listiewRecipeAdapter
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        return super.onCreateOptionsMenu(menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+//        R.id.action_favorite -> {
+//            return true
+//        }
+//
+//        R.id.action_share -> {
+//
+//        }
+//        else -> {
+//            return super.onOptionsItemSelected(item)
+//
+//        }
+//    }
 
 }

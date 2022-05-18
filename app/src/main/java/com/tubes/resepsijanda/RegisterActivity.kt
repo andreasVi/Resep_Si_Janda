@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -13,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.tubes.resepsijanda.databinding.ActivityLoginBinding
 import com.tubes.resepsijanda.databinding.ActivityRegisterBinding
 import com.tubes.resepsijanda.ui.myrecipes.MyRecipesFragment
@@ -30,9 +33,12 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     // FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
+    private var fullname = ""
     private var email = ""
     private var password = ""
 
+    // Form text
+    private lateinit var registerFullName : EditText
     private lateinit var registerEmail : EditText
     private lateinit var registerPassword: EditText
 
@@ -56,6 +62,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         // init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
 
+        registerFullName = findViewById(R.id.register_full_name)
         registerEmail = findViewById(R.id.register_email)
         registerPassword = findViewById(R.id.register_password)
 
@@ -117,7 +124,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 val email = firebaseUser!!.email
                 Toast.makeText(this, "Account created with email $email", Toast.LENGTH_SHORT).show()
 
-                // open my recipe (profile)
+                // insert data to firestore db
+                insertData()
+
+                // open main activity
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
@@ -125,6 +135,29 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 // register failed
                 progressDialog.dismiss()
                 Toast.makeText(this, "Register Failed due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun insertData() {
+        val dbFirestore = Firebase.firestore
+
+        fullname = registerFullName.getText().toString().trim()
+        email = registerEmail.getText().toString().trim()
+
+        // Create a new user with full name and email
+        val user = hashMapOf(
+            "name" to fullname,
+            "email" to email
+        )
+
+        // Add a new document with a generated ID
+        dbFirestore.collection("users")
+            .document(email).set(user)
+            .addOnSuccessListener {
+                Log.d("Success","DocumentSnapshot added with email: $email")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Error adding document", e)
             }
     }
 

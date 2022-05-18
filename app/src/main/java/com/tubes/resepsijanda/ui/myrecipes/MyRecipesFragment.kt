@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +17,7 @@ import com.tubes.resepsijanda.databinding.FragmentMyrecipesBinding
 import com.tubes.resepsijanda.entity.Category
 import com.tubes.resepsijanda.entity.Favorite
 
-class MyRecipesFragment : Fragment() {
+class MyRecipesFragment : Fragment(), View.OnClickListener {
     private val list = ArrayList<Favorite>()
     private var _binding: FragmentMyrecipesBinding? = null
 
@@ -32,10 +35,11 @@ class MyRecipesFragment : Fragment() {
     ): View {
 //        checkUser()
 
-//        binding.btnLogout.setOnClickListener {
-//            firebaseAuth.signOut()
-//            checkUser()
-//        }
+        val view: View = inflater!!.inflate(R.layout.fragment_myrecipes, container, false)
+        val btnLogout : Button = view.findViewById(R.id.btn_logout)
+
+        btnLogout.setOnClickListener(this)
+        
         val notificationsViewModel =
             ViewModelProvider(this).get(MyRecipesViewModel::class.java)
 
@@ -50,6 +54,15 @@ class MyRecipesFragment : Fragment() {
         list.addAll(getListFavorite())
         showFavoriteRecipe()
         return root
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_logout -> {
+                firebaseAuth.signOut()
+                // checkUser()
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -69,7 +82,6 @@ class MyRecipesFragment : Fragment() {
 //            // user is null, user is not logged in
 //            startActivity(Intent(getActivity(), LoginActivity::class.java))
 //        }
-//
 //    }
 
     fun getListFavorite():ArrayList<Favorite>{
