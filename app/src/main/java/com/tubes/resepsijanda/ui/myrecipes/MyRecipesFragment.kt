@@ -1,7 +1,5 @@
 package com.tubes.resepsijanda.ui.myrecipes
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.tubes.resepsijanda.LoginActivity
 import com.tubes.resepsijanda.R
-import com.tubes.resepsijanda.adapter.GridHomeAdapter
-import com.tubes.resepsijanda.adapter.GridMyrecipesAdapter
+import com.tubes.resepsijanda.adapter.CardFavoritesAdapter
 import com.tubes.resepsijanda.databinding.FragmentMyrecipesBinding
 import com.tubes.resepsijanda.entity.Category
 import com.tubes.resepsijanda.entity.Favorite
@@ -43,7 +39,7 @@ class MyRecipesFragment : Fragment(), View.OnClickListener {
         val btnLogout : Button = view.findViewById(R.id.btn_logout)
 
         btnLogout.setOnClickListener(this)
-
+        
         val notificationsViewModel =
             ViewModelProvider(this).get(MyRecipesViewModel::class.java)
 
@@ -54,9 +50,9 @@ class MyRecipesFragment : Fragment(), View.OnClickListener {
 //        notificationsViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        binding.rvMyrecipes.setHasFixedSize(true)
+        binding.rvMyRecipes.setHasFixedSize(true)
         list.addAll(getListFavorite())
-        showMyrecipesGrid()
+        showFavoriteRecipe()
         return root
     }
 
@@ -91,10 +87,12 @@ class MyRecipesFragment : Fragment(), View.OnClickListener {
     fun getListFavorite():ArrayList<Favorite>{
         val dataName = resources.getStringArray(R.array.category_recipe)
         val dataPhoto = resources.getStringArray(R.array.image_category_recipe)
+        val dataID = 0
 
         val listFavorite = ArrayList<Favorite>()
         for (position in dataName.indices){
             val favorite = Favorite(
+                dataID,
                 dataName[position],
                 dataPhoto[position]
             )
@@ -103,9 +101,9 @@ class MyRecipesFragment : Fragment(), View.OnClickListener {
         return listFavorite
     }
 
-    private fun showMyrecipesGrid(){
-        binding.rvMyrecipes.layoutManager = GridLayoutManager(context, 1)
-        val gridMyrecipesAdapter = GridMyrecipesAdapter(list)
-        binding.rvMyrecipes.adapter = gridMyrecipesAdapter
+    private fun showFavoriteRecipe(){
+        binding.rvMyRecipes.layoutManager = GridLayoutManager(context, 1)
+        val cardMyRecipesAdapter = CardFavoritesAdapter(list)
+        binding.rvMyRecipes.adapter = cardMyRecipesAdapter
     }
 }
