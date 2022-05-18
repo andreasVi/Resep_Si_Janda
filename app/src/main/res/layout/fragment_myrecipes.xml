@@ -60,7 +60,7 @@
         tools:listitem="@layout/item_grid_myrecipes" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

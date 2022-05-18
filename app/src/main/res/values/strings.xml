@@ -12,6 +12,7 @@
     <string name="no_account">Don\'t have an account? Register.</string>
     <string name="resep_si_janda">Resep Si Janda</string>
     <string name="view_recipes">View Recipe</string>
+    <string name="minutes">Ready in %1$s minutes</string>
 
     <string-array name="name_category">
         <item>Indonesian</item>
@@ -27,17 +28,35 @@
         <item>https://wallpaperaccess.com/full/1321696.jpg</item>
     </string-array>
 
-    <string-array name="category_recipe_diet">
-        <item>Ketogenic</item>
-        <item>Vegetarian</item>
-        <item>Vegan</item>
-        <item>Paleo</item>
+    <string-array name="category_recipe">
+        <item>Main Course</item>
+        <item>Side Dish</item>
+        <item>Dessert</item>
+        <item>Appetizer</item>
+        <item>Salad</item>
+        <item>Bread</item>
+        <item>Breakfast</item>
+        <item>Soup</item>
+        <item>Beverage</item>
+        <item>Sauce</item>
+        <item>Marinade</item>
+        <item>Fingerfood</item>
+        <item>Snack</item>
     </string-array>
 
-    <string-array name="image_recipe_diet">
-        <item>https://res.cloudinary.com/dk0z4ums3/image/upload/v1589917662/attached_image/diet-keto-ketahui-manfaat-cara-menjalani-dan-risikonya.jpg</item>
-        <item>https://images-prod.healthline.com/hlcmsresource/images/AN_images/vegetarian-diet-plan-1296x728-feature.jpg</item>
-        <item>https://www.news-medical.net/image.axd?picture=2021%2F3%2Fshutterstock_1652895442.jpg</item>
-        <item>https://cdn.hellosehat.com/wp-content/uploads/2016/09/paleo-diet.jpg</item>
+    <string-array name="image_category_recipe">
+        <item>https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/11/25/0/FNK_pan-seared-salmon-with-kale-apple-salad_s4x3.jpg.rend.hgtvcom.616.462.suffix/1387918756116.jpeg</item>
+        <item>https://www.acouplecooks.com/wp-content/uploads/2019/09/Sweet-Potato-Wedges-004.jpg</item>
+        <item>https://images.f2fcdn.net/files/niken/suka-makanan-manis-yuk-cobain-dessert-box-kekinian-ini.jpg</item>
+        <item>https://cdn-cas.orami.co.id/parenting/images/Fungsi_Appetizer_www.rachelcooks.com.width-800.jpg</item>
+        <item>https://receptfavoriter.se/sites/default/files/styles/recipe_4x3/public/sallad_med_tomat_avocado_rodlok_och_dijondressing_85_1060.jpg</item>
+        <item>https://p1-tt-ipv6.byteimg.com/origin/pgc-image/3d9d12c9820147e481d230c889e6b0a5.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Breakfast_Platter.jpg/1200px-Breakfast_Platter.jpg</item>
+        <item>https://www.inspiredtaste.net/wp-content/uploads/2018/10/Homemade-Vegetable-Soup-Recipe-2-1200.jpg</item>
+        <item>https://shop.pall.com/INTERSHOP/static/WFS/PALL-PALLUS-Site/-/PALL/en_US/images/Categories/Food-Beverage/intershop/fb-segment-quality-juice.jpg</item>
+        <item>https://thumbs.dreamstime.com/b/various-dip-sauces-bowls-top-view-74342622.jpg</item>
+        <item>https://static01.nyt.com/images/2015/05/20/dining/20SPIEDIEMARINADE/20SPIEDIEMARINADE-articleLarge.jpg</item>
+        <item>https://asset.kompas.com/crops/4kU9rwbN9CZ3FU9x-lIXtnKHZi0=/0x0:739x493/750x500/data/photo/2020/04/26/5ea5419d24d7e.jpg</item>
+        <item>https://diethood.com/wp-content/uploads/2021/07/roasted-parmesan-cauliflower-bites-7.jpg</item>
     </string-array>
 </resources>
