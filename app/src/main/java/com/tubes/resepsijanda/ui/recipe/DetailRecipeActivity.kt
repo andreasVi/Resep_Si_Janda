@@ -84,7 +84,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     val imageTemp: ImageView = findViewById(R.id.img_recipe)
                     Glide.with(this@DetailRecipeActivity)
                         .load(image)
-                        .error(R.drawable.ic_launcher_background)
+                        .error(R.drawable.logo)
                         .into(imageTemp)
 
                     //Menampilkan waktu yang dibutuhkan untuk membuat resep ini
