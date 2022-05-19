@@ -5,20 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
-import com.tubes.resepsijanda.R
 import com.tubes.resepsijanda.adapter.GridHomeAdapter
 import com.tubes.resepsijanda.databinding.FragmentHomeBinding
-import com.tubes.resepsijanda.entity.Category
+import com.tubes.resepsijanda.entity.Recipe
 import com.tubes.resepsijanda.util.constant.Companion.compSearch
 import com.tubes.resepsijanda.util.constant.Companion.home
 import com.tubes.resepsijanda.util.constant.Companion.key
@@ -65,7 +60,7 @@ class HomeFragment : Fragment() {
 
     fun getListCategory(){
         val client = AsyncHttpClient()
-        val listPopularity = ArrayList<Category>()
+        val listPopularity = ArrayList<Recipe>()
 
         val url = spoonacular + compSearch + home + key
         client.get(url, object : AsyncHttpResponseHandler(){
@@ -86,12 +81,12 @@ class HomeFragment : Fragment() {
                         val title = jsonArray.getJSONObject(i).getString("title")
                         val image = jsonArray.getJSONObject(i).getString("image")
 
-                        val category = Category(
+                        val recipe = Recipe(
                             id,
                             title,
                             image
                         )
-                        listPopularity.add(category)
+                        listPopularity.add(recipe)
                     }
                     showHomeGrid(listPopularity)
 
@@ -135,7 +130,7 @@ class HomeFragment : Fragment() {
 //        return listCategory
 //    }
 
-    private fun showHomeGrid(listCategory: ArrayList<Category>){
+    private fun showHomeGrid(listCategory: ArrayList<Recipe>){
         binding.rvCategory.layoutManager = GridLayoutManager(context, 2)
         val gridHomeAdapter = GridHomeAdapter(listCategory)
         binding.rvCategory.adapter = gridHomeAdapter
