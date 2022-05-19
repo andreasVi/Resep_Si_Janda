@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.tubes.resepsijanda.entity.Category
 import com.tubes.resepsijanda.databinding.ItemGridHomeBinding
+import com.tubes.resepsijanda.entity.Recipe
 import com.tubes.resepsijanda.ui.recipe.DetailRecipeActivity
 
-class GridHomeAdapter(private val listCategory: ArrayList<Category>) : RecyclerView.Adapter<GridHomeAdapter.GridViewHolder>() {
+class GridHomeAdapter(private val listCategory: ArrayList<Recipe>) : RecyclerView.Adapter<GridHomeAdapter.GridViewHolder>() {
     companion object{
         private val TAG = GridHomeAdapter::class.java.simpleName
     }
@@ -28,7 +28,7 @@ class GridHomeAdapter(private val listCategory: ArrayList<Category>) : RecyclerV
     override fun getItemCount(): Int = listCategory.size
 
     inner class GridViewHolder(private val binding: ItemGridHomeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: Category) {
+        fun bind(category: Recipe) {
             with(binding) {
                 Glide.with(itemView.context)
                     .load(category.photo)
