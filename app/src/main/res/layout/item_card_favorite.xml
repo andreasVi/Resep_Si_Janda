@@ -44,22 +44,13 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/img_favorite_recipe"
             android:orientation="horizontal">
-            <TextView
-                android:id="@+id/remove_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Remove" />
 
             <Button
                 android:id="@+id/btn_view_favorite"
-                android:layout_width="75dp"
-                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="60dp"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:text="View" />
