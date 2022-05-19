@@ -29,7 +29,6 @@ import org.json.JSONObject
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var bindingsearch: ActivityListRecipeBinding
     companion object {
         private val TAG = MainActivity::class.java.simpleName
 
