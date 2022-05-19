@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
             // Gunakan method ini ketika search selesai atau OK
                 val intent = Intent(this@MainActivity, ListRecipe::class.java)
                 intent.putExtra("search_recipe", query)
+                Log.d(TAG, query)
                 this@MainActivity.startActivity(intent)
-                Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
                 return true
             }
 

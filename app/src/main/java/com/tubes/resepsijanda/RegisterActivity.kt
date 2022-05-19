@@ -44,7 +44,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
 
         // configure actionbar and enable back button
@@ -69,11 +68,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val btnRegister: Button = findViewById(R.id.btn_register)
         btnRegister.setOnClickListener(this)
 
-//        // handle click, begin register
-//        binding.btnRegister.setOnClickListener {
-//            //validate data
-//            validateData()
-//        }
     }
 
     override fun onClick(v: View) {
