@@ -2,6 +2,7 @@ package com.tubes.resepsijanda
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -13,16 +14,25 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
+import com.tubes.resepsijanda.adapter.ListRecipesAdapter
+import com.tubes.resepsijanda.databinding.ActivityListRecipeBinding
 import com.tubes.resepsijanda.databinding.ActivityMainBinding
+import com.tubes.resepsijanda.entity.Recipe
+import com.tubes.resepsijanda.ui.home.HomeFragment
+import com.tubes.resepsijanda.ui.recipe.ListRecipe
+import com.tubes.resepsijanda.util.constant
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var bindingsearch: ActivityListRecipeBinding
     companion object {
         private val TAG = MainActivity::class.java.simpleName
+
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -60,6 +70,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextSubmit(query: String): Boolean {
             // Gunakan method ini ketika search selesai atau OK
+                val intent = Intent(this@MainActivity, ListRecipe::class.java)
+                intent.putExtra("search_recipe", query)
+                this@MainActivity.startActivity(intent)
                 Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
                 return true
             }
@@ -72,4 +85,5 @@ class MainActivity : AppCompatActivity() {
         })
         return true
     }
+
 }

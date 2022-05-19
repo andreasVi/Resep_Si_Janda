@@ -37,11 +37,22 @@ class ListRecipe : AppCompatActivity() {
 
     fun getRecipesfromApi(){
         val nameDiscover = intent.getStringExtra("name_discover")
-        title = nameDiscover
+        val searchQuery = intent.getStringExtra("search_recipe")
+        var url =  ""
+
+        Log.d(TAG, nameDiscover.toString())
+
+        if (nameDiscover.isNullOrEmpty() ) {
+            title = searchQuery
+            url = spoonacular + compSearch + search + searchQuery + key
+        } else {
+            title = nameDiscover
+            url = spoonacular + compSearch + discover + nameDiscover + qty +key
+        }
 
         val client = AsyncHttpClient()
         val listRecipes = ArrayList<Recipe>()
-        val url = spoonacular + compSearch + discover + nameDiscover + qty +key
+
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
