@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
@@ -161,22 +162,28 @@ class DetailRecipeActivity : AppCompatActivity() {
         binding.rvIngredients.adapter = listiewRecipeAdapter
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-//        R.id.action_favorite -> {
-//            return true
-//        }
-//
-//        R.id.action_share -> {
-//
-//        }
-//        else -> {
-//            return super.onOptionsItemSelected(item)
-//
-//        }
-//    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val menuInflater: MenuInflater = menuInflater
+        menuInflater.inflate(R.menu.fav_and_share_menu, menu)
+        menuInflater.inflate(R.menu.search_menu, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.action_favorite -> {
+                return true
+            }
+            R.id.action_share -> {
+                getCardRecipe()
+                return true
+            }
+        }
+        return false
+    }
+
+    fun getCardRecipe(){
+        //https://api.spoonacular.com/recipes/715538/card?apiKey=4b526d8bbcca475cbaaee525f01065db
+
+    }
 }
