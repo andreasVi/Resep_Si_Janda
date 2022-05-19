@@ -1,6 +1,6 @@
 package com.tubes.resepsijanda.ui.recipe
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -10,23 +10,28 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.tubes.resepsijanda.R
 import com.tubes.resepsijanda.adapter.ListIngredientsAdapter
-import com.tubes.resepsijanda.adapter.ListRecipesAdapter
 import com.tubes.resepsijanda.databinding.ActivityDetailRecipeBinding
 import com.tubes.resepsijanda.entity.Ingredients
-import com.tubes.resepsijanda.entity.Recipe
 import com.tubes.resepsijanda.util.constant
 import com.tubes.resepsijanda.util.constant.Companion.information
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 
+
 class DetailRecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailRecipeBinding
+//    lateinit var title: String
+//    lateinit var image: String
     companion object{
         private val TAG = DetailRecipeActivity::class.java.simpleName
     }
@@ -172,18 +177,67 @@ class DetailRecipeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.action_favorite -> {
+                val dbFirestore = Firebase.firestore
+                val user = FirebaseAuth.getInstance().currentUser
+                val idRecipe = intent.getIntExtra("id_recipe",0)
+                val docData = hashMapOf(
+                    "id" to idRecipe
+                )
+
+                dbFirestore.collection("users")
+                    .document(user!!.email.toString())
+                    .collection("favorites")
+                    .document(idRecipe.toString()).set(docData)
+                    .addOnSuccessListener { Log.d(TAG, "Data berhasil disimpan ke database") }
+                    .addOnFailureListener{ Log.d(TAG, "Data gagal disimpan ke database") }
                 return true
             }
             R.id.action_share -> {
-                getCardRecipe()
+                val client = AsyncHttpClient()
+                val idRecipe = intent.getIntExtra("id_recipe",0)
+                val url = "https://api.spoonacular.com/recipes/$idRecipe/card?apiKey=0ba760cf8b564e1c900135e42a1bcece"
+                client.get(url, object : AsyncHttpResponseHandler(){
+                    override fun onSuccess(
+                        statusCode: Int,
+                        headers: Array<out Header>,
+                        responseBody: ByteArray
+                    ) {
+                        val result = String(responseBody)
+                        Log.d(TAG, result)
+                        try {
+                            val responseObject = JSONObject(result)
+                            val urlImageShare = responseObject.getString("url")
+
+                            val sharingIntent = Intent(Intent.ACTION_SEND)
+                            sharingIntent.type = "text/plain"
+
+                            sharingIntent.putExtra(Intent.EXTRA_TEXT, urlImageShare)
+                            startActivity(Intent.createChooser(sharingIntent, "Sharing Option"))
+                        } catch (e:Exception){
+                            Toast.makeText(this@DetailRecipeActivity, e.message, Toast.LENGTH_SHORT).show()
+                            e.printStackTrace()
+                        }
+                    }
+
+                    override fun onFailure(
+                        statusCode: Int,
+                        headers: Array<out Header>,
+                        responseBody: ByteArray,
+                        error: Throwable
+                    ) {
+                        //Jika koneksi gagal
+                        val errorMessage = when (statusCode) {
+                            401 -> "$statusCode : Bad Request"
+                            403 -> "$statusCode : Forbidden"
+                            404 -> "$statusCode : Not Found"
+                            else -> "$statusCode : ${error.message}"
+                        }
+                        Toast.makeText(this@DetailRecipeActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
+                })
                 return true
             }
         }
         return false
-    }
-
-    fun getCardRecipe(){
-        //https://api.spoonacular.com/recipes/715538/card?apiKey=4b526d8bbcca475cbaaee525f01065db
-
     }
 }
