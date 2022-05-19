@@ -14,6 +14,7 @@
     <string name="view_recipes">View Recipe</string>
     <string name="minutes">Ready in %1$s minutes</string>
     <string name="serving">Serving: %1$s</string>
+    <string name="search_result">Search Result</string>
 
     <string-array name="name_category">
         <item>Indonesian</item>

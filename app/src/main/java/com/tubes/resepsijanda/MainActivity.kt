@@ -13,11 +13,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.common.util.ArrayUtils.newArrayList
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.tubes.resepsijanda.databinding.ActivityMainBinding
+import com.tubes.resepsijanda.entity.Recipe
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +32,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var newRecyclerview: RecyclerView
+    private lateinit var newArrayList : ArrayList<Recipe>
+    private lateinit var tempArrayList : ArrayList<Recipe>
+    lateinit var imageId : Array<Int>
+    lateinit var heading : Array<String>
+    lateinit var recipe : Array<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +58,17 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        newRecyclerview = findViewById(R.id.search_menu)
+        newRecyclerview.layoutManager = LinearLayoutManager(this)
+        newRecyclerview.setHasFixedSize(true)
+
+
+        newArrayList = arrayListOf<Recipe>()
+        tempArrayList = arrayListOf<Recipe>()
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -66,6 +89,24 @@ class MainActivity : AppCompatActivity() {
 
             // Gunakan method ini untuk merespon tiap perubahan huruf pada searchView
             override fun onQueryTextChange(newText: String): Boolean {
+
+                tempArrayList.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()){
+                    newArrayList.forEach(){
+
+                       /* if (it.toLowerCase(Locale.getDefault()).contains(searchText)){
+
+                            tempArrayList.add(it)
+                        }*/
+                    }
+                    newRecyclerview.adapter!!.notifyDataSetChanged()
+                } else {
+
+                    tempArrayList.clear()
+                    tempArrayList.addAll(newArrayList)
+                    newRecyclerview.adapter!!.notifyDataSetChanged()
+                }
                 return false
             }
 
