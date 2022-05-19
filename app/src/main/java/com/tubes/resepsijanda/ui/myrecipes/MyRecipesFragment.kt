@@ -27,7 +27,7 @@ import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 
 class MyRecipesFragment : Fragment() {
-    private val list = ArrayList<Favorite>()
+    private val listFavoritesID = ArrayList<Int>()
     private var _binding: FragmentMyrecipesBinding? = null
     companion object{
         private val TAG = MyRecipesFragment::class.java.simpleName
@@ -72,7 +72,6 @@ class MyRecipesFragment : Fragment() {
 //        }
 
         binding.rvMyRecipes.setHasFixedSize(true)
-        getFavorites()
         return root
     }
 
@@ -106,6 +105,23 @@ class MyRecipesFragment : Fragment() {
         }
     }
 
+    private fun getFavoriteFromDb(email: String){
+        val db = Firebase.firestore
+        db.collection("users").document(email).collection("favorites").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val favoriteID = document.data.get("id").toString().toInt()
+                    listFavoritesID.add(favoriteID)
+                    Log.d(TAG, "favorite ID = $listFavoritesID")
+                }
+                Log.d(TAG, "size: ${listFavoritesID.size}")
+                getFavorites(listFavoritesID)
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
     private fun getDataFromDb(email: String){
         val db = Firebase.firestore
         val docRef = db.collection("users").document(email)
@@ -115,7 +131,8 @@ class MyRecipesFragment : Fragment() {
                     val data = document.data
                     val image = data!!.get("image").toString()
                     val name = data!!.get("name").toString()
-                    Log.d("Document data: ", " image = $image name = $name")
+                    getFavoriteFromDb(email)
+                    Log.d("Document data: ", " image = $image, name = $name")
 
                     //Set username by logged in user
                     binding.userName.text = name
@@ -134,12 +151,11 @@ class MyRecipesFragment : Fragment() {
             }
     }
 
-    fun getFavorites(){
+    fun getFavorites(listFavorites: ArrayList<Int>){
         //dummy list of id which is added to favorites
-        val listFavoritesID = arrayOf(664429, 658007, 715569, 643450, 642780)
         val client = AsyncHttpClient()
         val listFavoriteRecipes = ArrayList<Favorite>()
-//        Log.d("favorite count: ", "${listFavoritesID.size}")
+        Log.d("favorite count: ", "${listFavorites.size}")
         for (i in 0 until listFavoritesID.size){
             val url = spoonacular + listFavoritesID[i] + information + key
             client.get(url, object : AsyncHttpResponseHandler() {
