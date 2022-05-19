@@ -23,6 +23,7 @@ import com.tubes.resepsijanda.adapter.ListIngredientsAdapter
 import com.tubes.resepsijanda.databinding.ActivityDetailRecipeBinding
 import com.tubes.resepsijanda.entity.Ingredients
 import com.tubes.resepsijanda.util.constant
+import com.tubes.resepsijanda.util.constant.Companion.Andreas
 import com.tubes.resepsijanda.util.constant.Companion.information
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
@@ -195,7 +196,7 @@ class DetailRecipeActivity : AppCompatActivity() {
             R.id.action_share -> {
                 val client = AsyncHttpClient()
                 val idRecipe = intent.getIntExtra("id_recipe",0)
-                val url = "https://api.spoonacular.com/recipes/$idRecipe/card?apiKey=0ba760cf8b564e1c900135e42a1bcece"
+                val url = "https://api.spoonacular.com/recipes/$idRecipe/card?apiKey=$Andreas"
                 client.get(url, object : AsyncHttpResponseHandler(){
                     override fun onSuccess(
                         statusCode: Int,
